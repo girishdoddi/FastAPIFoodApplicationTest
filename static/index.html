@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ed">
+  <title>Table & Thyme | Food nearby</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Table and Thyme home">
+        <span class="brand-mark" aria-hidden="true">T<span>&</span>T</span>
+        <span class="brand-name">table <i>&</i> thyme</span>
+      </a>
+      <div class="top-actions">
+        <span class="today-label">GOOD FOOD, CLOSE BY</span>
+        <button class="theme-button" id="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <span id="theme-icon" aria-hidden="true">☾</span><span id="theme-label">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="welcome-band">
+        <div class="welcome-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> YOUR NEIGHBORHOOD TABLE</p>
+          <h1>A little closer<br>to <em>something good.</em></h1>
+          <p class="welcome-note">Find the places and plates worth coming back for.</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="art-sun"></div>
+          <div class="art-plate"><span></span><i></i><b></b></div>
+          <div class="art-caption">made around<br>the corner</div>
+          <div class="art-leaf leaf-one"></div><div class="art-leaf leaf-two"></div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Account access and food discovery">
+        <aside class="auth-panel" id="auth-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">GET STARTED</p>
+              <h2 id="auth-heading">Welcome back</h2>
+            </div>
+            <span class="step-number">01 <i>/ 02</i></span>
+          </div>
+
+          <div class="segmented role-switch" role="group" aria-label="Choose account type">
+            <button class="segment active" type="button" data-role="user">I'm eating</button>
+            <button class="segment" type="button" data-role="restaurant">I run a restaurant</button>
+          </div>
+
+          <div class="auth-tabs" role="tablist" aria-label="Account action">
+            <button class="auth-tab active" type="button" role="tab" aria-selected="true" data-mode="login">Log in</button>
+            <button class="auth-tab" type="button" role="tab" aria-selected="false" data-mode="signup">Create account</button>
+          </div>
+
+          <form id="auth-form" class="form-stack">
+            <div class="field" id="name-field" hidden>
+              <label for="name">Your name</label>
+              <input id="name" name="name" autocomplete="name" minlength="3" maxlength="20" placeholder="e.g. Asha Rao">
+            </div>
+            <div class="field">
+              <label id="identity-label" for="identity">User ID</label>
+              <input id="identity" name="identity" autocomplete="username" required placeholder="Your user ID">
+              <small id="identity-hint" class="field-hint">The ID you used when signing up</small>
+            </div>
+            <div class="field" id="phone-field" hidden>
+              <label for="phone">Mobile number</label>
+              <input id="phone" name="phone" inputmode="numeric" autocomplete="tel" pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile number">
+            </div>
+            <div class="field" id="dob-field" hidden>
+              <label for="dob">Date of birth</label>
+              <input id="dob" name="dob" type="date">
+            </div>
+            <div class="field" id="gender-field" hidden>
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender"><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select>
+            </div>
+            <div class="field" id="pincode-field" hidden>
+              <label for="pincode">Area pincode</label>
+              <input id="pincode" name="pincode" inputmode="numeric" pattern="[1-9][0-9]{5}" maxlength="6" placeholder="6-digit pincode">
+            </div>
+            <div class="field" id="city-field" hidden>
+              <label for="city">City</label>
+              <input id="city" name="city" maxlength="40" placeholder="Your city">
+            </div>
+            <div class="field" id="address-field" hidden>
+              <label for="address">Restaurant address</label>
+              <textarea id="address" name="address" maxlength="200" rows="2" placeholder="Street, area, landmark"></textarea>
+            </div>
+            <div class="field">
+              <div class="label-row"><label for="password">Password</label><span id="password-note">Keep it private</span></div>
+              <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Enter your password">
+            </div>
+            <button class="submit-button" type="submit"><span id="submit-label">Log in</span><span aria-hidden="true">↗</span></button>
+            <p id="auth-message" class="message" role="status" aria-live="polite"></p>
+          </form>
+          <p class="privacy-note"><span aria-hidden="true">✳</span> Your account details stay private.</p>
+        </aside>
+
+        <section class="results-panel" aria-live="polite">
+          <div class="results-topline">
+            <div><p class="eyebrow" id="results-eyebrow">A GOOD PLACE TO BEGIN</p><h2 id="results-title">What's on the menu?</h2></div>
+            <span class="results-index" id="results-index">DISCOVER <b>·</b> 01</span>
+          </div>
+          <div id="signed-out-view" class="empty-state">
+            <div class="empty-illustration" aria-hidden="true"><span class="plate-ring"></span><span class="plate-center"></span><span class="fork">♆</span><span class="spark spark-a">✳</span><span class="spark spark-b">✦</span></div>
+            <p class="empty-title">A good meal starts nearby.</p>
+            <p class="empty-copy">Log in to find restaurants in your area or open a restaurant account to share your menu.</p>
+            <div class="feature-line"><span>01 <b>DISCOVER</b></span><span>02 <b>CHOOSE</b></span><span>03 <b>ENJOY</b></span></div>
+          </div>
+          <div id="user-view" class="dashboard" hidden>
+            <form id="restaurant-search" class="inline-search">
+              <div class="field"><label for="search-pincode">Restaurants near pincode</label><input id="search-pincode" inputmode="numeric" pattern="[1-9][0-9]{5}" maxlength="6" placeholder="Enter 6-digit pincode" required></div>
+              <button class="icon-submit" type="submit" aria-label="Find restaurants" title="Find restaurants">⌕</button>
+            </form>
+            <p id="search-message" class="message" role="status"></p>
+            <div id="restaurant-list" class="restaurant-list"></div>
+            <div id="menu-area" class="menu-area" hidden></div>
+          </div>
+          <div id="restaurant-view" class="dashboard" hidden>
+            <section class="owner-menu" aria-labelledby="owner-menu-heading">
+              <div class="menu-heading"><h3 id="owner-menu-heading">Your menu</h3><div class="menu-actions"><span id="owner-menu-count"></span><button id="reload-owner-menu" class="menu-load-button" type="button"><span aria-hidden="true">↻</span> Load my menu</button></div></div>
+              <p id="owner-menu-message" class="message" role="status" aria-live="polite">Loading your menu…</p>
+              <div id="owner-menu-list" class="menu-list"></div>
+            </section>
+            <div class="owner-intro"><span class="owner-icon" aria-hidden="true">✳</span><div><p class="eyebrow">YOUR KITCHEN</p><h3>Add a menu item</h3></div></div>
+            <form id="item-form" class="item-form">
+              <div class="field"><label for="item-name">Item name</label><input id="item-name" maxlength="50" placeholder="e.g. Masala dosa" required></div>
+              <div class="field"><label for="item-price">Price</label><div class="price-input"><span>₹</span><input id="item-price" type="number" min="1" max="499" placeholder="120" required></div></div>
+              <button class="submit-button" type="submit"><span>Add to menu</span><span aria-hidden="true">↗</span></button>
+              <p id="item-message" class="message" role="status"></p>
+            </form>
+            <div class="owner-footnote"><span>↳</span> Changes are saved to your restaurant menu.</div>
+          </div>
+          <div id="signed-in-bar" class="signed-in-bar" hidden><span><i class="online-dot"></i><span id="session-label">Signed in</span></span><button id="logout-button" type="button">Sign out <span aria-hidden="true">↗</span></button></div>
+        </section>
+      </section>
+    </main>
+    <footer class="footer"><span>TABLE & THYME</span><span>LOCAL PLATES, GOOD DAYS</span><span>© 2026</span></footer>
+  </div>
+</body>
+</html>
