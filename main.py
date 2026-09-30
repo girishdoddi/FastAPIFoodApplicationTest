@@ -4,6 +4,7 @@ from hashlib import md5
 from pathlib import Path as FilePath
 import time
 from fastapi import FastAPI, Depends, status, HTTPException, Request, Response, Query, Path
+from fastapi import BackgroundTasks
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -250,7 +251,7 @@ def get_restaurents(request : Request, input_data : FetchRestViaPincode, token =
             }
             for r in restaurents
         ]
-  
+
 
     
 @app.get("/restaurent/menu/{restaurent_id}", tags= ["Restaurent"], status_code=status.HTTP_200_OK)
@@ -276,4 +277,16 @@ def get_menu_items(request : Request, token = Depends(oauth2_scheme), db : Sessi
         }
         for r in result
     ]
+
+def print_data(message):
+    time.sleep(10)
+    print(message)
+    raise Exception
+
+@app.get("/background_task")
+def getbackground_task(request : Request, background_tasks : BackgroundTasks):
+    background_tasks.add_task(print_data, "This is a Background Task")
+    return {
+        "Status" : "Background task Ran!!!!"
+    }
 
