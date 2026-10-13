@@ -33,7 +33,7 @@ app.mount("/static", StaticFiles(directory=FilePath(__file__).parent / "static")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/user/login")
 
 ips_dict = defaultdict(list)
-LIMIT = 1000
+LIMIT = 100000
 WINDOW = 60
 
 @app.middleware("http")
